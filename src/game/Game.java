@@ -16,6 +16,8 @@ public class Game {
     private int specialRefreshOffset;
 
     public Game() {
+        this.beds = new ArrayList<>();
+        this.player = new Player(10);
     }
 
     public Game(SaveData saveData) {

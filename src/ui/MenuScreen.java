@@ -142,7 +142,8 @@ public class MenuScreen {
             }
             frame.dispose(); // close the menu window
             Game game = new Game(); // create a brand new game with default settings
-            new MainWindow(game); // open the main garden window
+            MainWindow mainWindow = new MainWindow(game); // open the main garden window
+            mainWindow.showMainWindow();
         });
 
         // Load Game button Listener
@@ -160,7 +161,8 @@ public class MenuScreen {
             }
             frame.dispose(); // close the menu window
             Game game = new Game(saveData); // build the game from the saved data
-            new MainWindow(game); // open the main garden window with restored state
+            MainWindow mainWindow = new MainWindow(game); // open the main garden window with restored state
+            mainWindow.showMainWindow();
         });
 
         // Quit button listener
