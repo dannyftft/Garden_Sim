@@ -12,16 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.Timer;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Cursor;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
+import java.awt.*;
 import java.util.ArrayList;
 
 public class MainWindow implements RefreshListener {
@@ -38,7 +29,7 @@ public class MainWindow implements RefreshListener {
         this.game = game;
         this.bedButtons = new ArrayList<>();
         this.frame = new JFrame("Garden Sim");
-        this.moneyLabel = new JLabel("money"); //TODO change to: formatMoney(game.getPlayer().getMoney())
+        this.moneyLabel = new JLabel(formatMoney(game.getPlayer().getMoney()));
         this.secretDebugBtn = new JButton();
         this.saveButton = new JButton("Save");
         this.debugWindow = null;
@@ -48,6 +39,7 @@ public class MainWindow implements RefreshListener {
         frame.setSize(700, 490);
         frame.setResizable(false);
         frame.setLocationRelativeTo(null);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         // top bar
         JPanel bar = new JPanel(new BorderLayout());
@@ -156,7 +148,30 @@ public class MainWindow implements RefreshListener {
         bar.add(left,  BorderLayout.WEST);
         bar.add(right, BorderLayout.EAST);
 
-        //TODO garden beds
+        JPanel grid = new JPanel(new GridLayout(2, 4, 10, 10)); // 2 rows, 4 columns, 10px gaps
+        grid.setBackground(new Color(72, 130, 62)); // green between the beds
+        grid.setBorder(BorderFactory.createEmptyBorder(16, 16, 16, 16)); // padding around the edge
+
+        ArrayList<GardenBed> beds = game.getBeds();
+        for (int i = 0; i < beds.size(); i++) {
+            GardenBed bed = beds.get(i);
+            BedButton button = new BedButton(bed);
+            int index = i;
+
+            button.addActionListener(e -> {
+                if (bed.isEmpty()) {
+                    ShopWindow shop = new ShopWindow(frame, game, index);
+                    shop.setVisible(true);
+                } else {
+                    InfoWindow info = new InfoWindow(frame, game, index);
+                    info.setVisible(true);
+                }
+                refreshUI();
+            });
+
+            bedButtons.add(button);
+            grid.add(button);
+        }
 
         // refresh timer: refresh every bed every 5 seconds so growth stages update without clicking
         Timer timer = new Timer(5000, e -> refreshUI());
@@ -164,6 +179,7 @@ public class MainWindow implements RefreshListener {
 
         frame.setLayout(new BorderLayout());
         frame.add(bar,  BorderLayout.NORTH); // top bar always sits at the top
+        frame.add(grid, BorderLayout.CENTER);
 
         frame.setVisible(true); // show the window
     }

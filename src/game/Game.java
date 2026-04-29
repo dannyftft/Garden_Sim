@@ -18,6 +18,10 @@ public class Game {
     public Game() {
         this.beds = new ArrayList<>();
         this.player = new Player(10);
+
+        for (int i = 0; i < 8; i++) {
+            beds.add(new GardenBed(i));
+        }
     }
 
     public Game(SaveData saveData) {
@@ -48,11 +52,11 @@ public class Game {
     }
 
     public Player getPlayer() {
-        return null;
+        return player;
     }
 
     public ArrayList<GardenBed> getBeds() {
-        return null;
+        return beds;
     }
 
     public GameData getGameData() {
