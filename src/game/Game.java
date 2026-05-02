@@ -16,11 +16,12 @@ public class Game {
     private int specialRefreshOffset;
 
     public Game() {
+        this.gameData = GameData.load("/plants.json"); // loads plants at startup
+        this.player = new Player(gameData.player.startingMoney); // uses starting money from the json
         this.beds = new ArrayList<>();
-        this.player = new Player(10);
 
-        for (int i = 0; i < 8; i++) {
-            beds.add(new GardenBed(i));
+        for (int i = 0; i < gameData.player.startingBedCount; i++) {
+            beds.add(new GardenBed(i)); // creates the starting beds
         }
     }
 

@@ -1,0 +1,28 @@
+{
+  "player": {
+    "startingMoney": 10,
+    "startingBedCount": 8
+  },
+  "economy": {
+    "priceJitterPercent": 0.10,
+    "priceRoundTo": 5,
+    "growthStyles": {
+      "fast_start_4": [0.40, 0.62, 0.82, 1.0]
+    }
+  },
+  "plants": [
+    {
+      "id": "radish",
+      "name": "Radish",
+      "description": "Tiny and fast. The best starter crop.",
+      "seedCost": 10,
+      "basePrice": 35,
+      "witheredPrice": 3,
+      "growthDurationSeconds": 600,
+      "witherDurationSeconds": 2400,
+      "stageCount": 4,
+      "growthStyle": "fast_start_4",
+      "special": false
+    }
+  ]
+}

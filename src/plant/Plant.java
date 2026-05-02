@@ -13,6 +13,15 @@ public abstract class Plant {
     protected int stageCount;
 
     public Plant(PlantData data) {
+        this.id = data.id;
+        this.name = data.name;
+        this.description = data.description;
+        this.seedCost = data.seedCost;
+        this.basePrice = data.basePrice;
+        this.witheredPrice = data.witheredPrice;
+        this.growthDurationSeconds = data.growthDurationSeconds;
+        this.witherDurationSeconds = data.witherDurationSeconds;
+        this.stageCount = data.stageCount;
     }
 
     public abstract int getCurrentStage();
@@ -26,30 +35,30 @@ public abstract class Plant {
     public abstract String getEstimatedTimeLeft();
 
     public String getId() {
-        return null;
+        return id;
     }
 
     public String getName() {
-        return null;
+        return name;
     }
 
     public String getDescription() {
-        return null;
+        return description;
     }
 
     public int getSeedCost() {
-        return 0;
+        return seedCost;
     }
 
     public int getBasePrice() {
-        return 0;
+        return basePrice;
     }
 
     public int getWitheredPrice() {
-        return 0;
+        return witheredPrice;
     }
 
     public int getStageCount() {
-        return 0;
+        return stageCount;
     }
 }
