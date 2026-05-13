@@ -1,0 +1,202 @@
+{
+  "player": {
+    "startingMoney": 10,
+    "startingBedCount": 8
+  },
+  "economy": {
+    "priceJitterPercent": 0.10,
+    "priceRoundTo": 5,
+    "growthStyles": {
+      "fast_start":   [0.55, 0.80, 1.0],
+      "linear":       [0.33, 0.66, 1.0],
+      "slow_start":   [0.20, 0.50, 1.0],
+      "fast_start_4": [0.40, 0.62, 0.82, 1.0],
+      "linear_4":     [0.25, 0.50, 0.75, 1.0],
+      "slow_start_4": [0.15, 0.35, 0.62, 1.0]
+    }
+  },
+  "plants": [
+    {
+      "id": "radish",
+      "name": "Radish",
+      "description": "Tiny and fast. The best starter crop.",
+      "seedCost": 10,
+      "basePrice": 35,
+      "witheredPrice": 3,
+      "growthDurationSeconds": 600,
+      "witherDurationSeconds": 600,
+      "stageCount": 4,
+      "growthStyle": "fast_start_4",
+      "special": false
+    },
+    {
+      "id": "wheat",
+      "name": "Wheat",
+      "description": "Fast-growing grain. Great for steady income.",
+      "seedCost": 15,
+      "basePrice": 50,
+      "witheredPrice": 4,
+      "growthDurationSeconds": 900,
+      "witherDurationSeconds": 600,
+      "stageCount": 4,
+      "growthStyle": "fast_start_4",
+      "special": false
+    },
+    {
+      "id": "carrot",
+      "name": "Carrot",
+      "description": "Crunchy and reliable. A solid beginner crop.",
+      "seedCost": 20,
+      "basePrice": 65,
+      "witheredPrice": 5,
+      "growthDurationSeconds": 1200,
+      "witherDurationSeconds": 600,
+      "stageCount": 4,
+      "growthStyle": "fast_start_4",
+      "special": false
+    },
+    {
+      "id": "potato",
+      "name": "Potato",
+      "description": "A dependable staple crop with solid returns.",
+      "seedCost": 35,
+      "basePrice": 110,
+      "witheredPrice": 8,
+      "growthDurationSeconds": 2100,
+      "witherDurationSeconds": 600,
+      "stageCount": 4,
+      "growthStyle": "linear_4",
+      "special": false
+    },
+    {
+      "id": "beetroot",
+      "name": "Beetroot",
+      "description": "Sweet and earthy. Takes longer but pays nicely.",
+      "seedCost": 45,
+      "basePrice": 140,
+      "witheredPrice": 10,
+      "growthDurationSeconds": 3000,
+      "witherDurationSeconds": 600,
+      "stageCount": 4,
+      "growthStyle": "linear_4",
+      "special": false
+    },
+    {
+      "id": "kale",
+      "name": "Kale",
+      "description": "Hardy greens. Grows steadily and sells well.",
+      "seedCost": 50,
+      "basePrice": 155,
+      "witheredPrice": 10,
+      "growthDurationSeconds": 3600,
+      "witherDurationSeconds": 600,
+      "stageCount": 4,
+      "growthStyle": "linear_4",
+      "special": false
+    },
+    {
+      "id": "cabbage",
+      "name": "Cabbage",
+      "description": "A big leafy vegetable. Worth the extra wait.",
+      "seedCost": 60,
+      "basePrice": 185,
+      "witheredPrice": 12,
+      "growthDurationSeconds": 5400,
+      "witherDurationSeconds": 600,
+      "stageCount": 4,
+      "growthStyle": "linear_4",
+      "special": false
+    },
+    {
+      "id": "cauliflower",
+      "name": "Cauliflower",
+      "description": "Large and valuable. One of the best normal crops.",
+      "seedCost": 90,
+      "basePrice": 270,
+      "witheredPrice": 18,
+      "growthDurationSeconds": 7200,
+      "witherDurationSeconds": 600,
+      "stageCount": 4,
+      "growthStyle": "slow_start_4",
+      "special": false
+    },
+    {
+      "id": "pumpkin",
+      "name": "Pumpkin",
+      "description": "Big harvest, big profits. Requires patience.",
+      "seedCost": 130,
+      "basePrice": 390,
+      "witheredPrice": 25,
+      "growthDurationSeconds": 14400,
+      "witherDurationSeconds": 600,
+      "stageCount": 4,
+      "growthStyle": "slow_start_4",
+      "special": false
+    },
+    {
+      "id": "sunflower",
+      "name": "Sunflower",
+      "description": "Tall and striking. A premium crop with great returns.",
+      "seedCost": 160,
+      "basePrice": 480,
+      "witheredPrice": 30,
+      "growthDurationSeconds": 21600,
+      "witherDurationSeconds": 600,
+      "stageCount": 4,
+      "growthStyle": "slow_start_4",
+      "special": false
+    },
+    {
+      "id": "pansy",
+      "name": "Pansy",
+      "description": "Rare vibrant flowers. A serious investment.",
+      "seedCost": 500,
+      "basePrice": 1500,
+      "witheredPrice": 60,
+      "growthDurationSeconds": 21600,
+      "witherDurationSeconds": 600,
+      "stageCount": 3,
+      "growthStyle": "slow_start",
+      "special": true
+    },
+    {
+      "id": "tulip",
+      "name": "Tulip",
+      "description": "A prized spring flower. Only grows for those who can afford it.",
+      "seedCost": 650,
+      "basePrice": 1950,
+      "witheredPrice": 80,
+      "growthDurationSeconds": 25200,
+      "witherDurationSeconds": 600,
+      "stageCount": 3,
+      "growthStyle": "slow_start",
+      "special": true
+    },
+    {
+      "id": "rose",
+      "name": "Rose",
+      "description": "Classic and luxurious. Worth every coin.",
+      "seedCost": 850,
+      "basePrice": 2500,
+      "witheredPrice": 100,
+      "growthDurationSeconds": 28800,
+      "witherDurationSeconds": 600,
+      "stageCount": 3,
+      "growthStyle": "slow_start",
+      "special": true
+    },
+    {
+      "id": "lavender",
+      "name": "Lavender",
+      "description": "The rarest and most profitable crop in the game.",
+      "seedCost": 1100,
+      "basePrice": 3200,
+      "witheredPrice": 130,
+      "growthDurationSeconds": 36000,
+      "witherDurationSeconds": 600,
+      "stageCount": 3,
+      "growthStyle": "slow_start",
+      "special": true
+    }
+  ]
+}

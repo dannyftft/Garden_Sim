@@ -1,6 +1,6 @@
 package plant;
 
-public abstract class Plant {
+public class Plant {
 
     protected String id;
     protected String name;
@@ -13,43 +13,54 @@ public abstract class Plant {
     protected int stageCount;
 
     public Plant(PlantData data) {
+        this.id = data.id;
+        this.name = data.name;
+        this.description = data.description;
+        this.seedCost = data.seedCost;
+        this.basePrice = data.basePrice;
+        this.witheredPrice = data.witheredPrice;
+        this.growthDurationSeconds = data.growthDurationSeconds;
+        this.witherDurationSeconds = data.witherDurationSeconds;
+        this.stageCount = data.stageCount;
     }
 
-    public abstract int getCurrentStage();
+    public int getCurrentStage() {
+        return 0;
+    }
 
-    public abstract boolean isWithered();
+    public boolean isWithered() {
+        return false;
+    }
 
-    public abstract boolean isFullyGrown();
+    public boolean isFullyGrown() {
+        return false;
+    }
 
-    public abstract int getCurrentPrice();
+    public int getCurrentPrice() {
+        return -1;
+    }
 
-    public abstract String getEstimatedTimeLeft();
+    public String getEstimatedTimeLeft() {
+        return "Unknown";
+    }
 
     public String getId() {
-        return null;
+        return id;
     }
 
     public String getName() {
-        return null;
-    }
-
-    public String getDescription() {
-        return null;
-    }
-
-    public int getSeedCost() {
-        return 0;
-    }
-
-    public int getBasePrice() {
-        return 0;
-    }
-
-    public int getWitheredPrice() {
-        return 0;
+        return name;
     }
 
     public int getStageCount() {
-        return 0;
+        return stageCount;
+    }
+
+    public long getGrowthDurationSeconds() {
+        return growthDurationSeconds;
+    }
+
+    public long getWitherDurationSeconds() {
+        return witherDurationSeconds;
     }
 }

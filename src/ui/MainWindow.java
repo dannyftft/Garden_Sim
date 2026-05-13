@@ -12,19 +12,10 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.Timer;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Cursor;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
+import java.awt.*;
 import java.util.ArrayList;
 
-public class MainWindow implements RefreshListener {
+public class MainWindow {
 
     private JFrame frame;
     private Game game;
@@ -38,7 +29,7 @@ public class MainWindow implements RefreshListener {
         this.game = game;
         this.bedButtons = new ArrayList<>();
         this.frame = new JFrame("Garden Sim");
-        this.moneyLabel = new JLabel("money"); //TODO change to: formatMoney(game.getPlayer().getMoney())
+        this.moneyLabel = new JLabel("Balance: $" + formatMoney(game.getPlayer().getMoney()));
         this.secretDebugBtn = new JButton();
         this.saveButton = new JButton("Save");
         this.debugWindow = null;
@@ -48,12 +39,12 @@ public class MainWindow implements RefreshListener {
         frame.setSize(700, 490);
         frame.setResizable(false);
         frame.setLocationRelativeTo(null);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         // top bar
         JPanel bar = new JPanel(new BorderLayout());
         bar.setBackground(new Color(45, 90, 40));
 
-        // left side of the top bar: secret debug button + coin icon + money
         JPanel left = new JPanel(new FlowLayout(FlowLayout.LEFT));
         left.setBackground(new Color(45, 90, 40));
 
@@ -73,47 +64,17 @@ public class MainWindow implements RefreshListener {
 
         left.add(secretDebugBtn);
 
-        // small gold coin
-        JPanel coinIcon = new JPanel() {
-            protected void paintComponent(Graphics g) {
-                super.paintComponent(g);
-                Graphics2D g2 = (Graphics2D) g.create();
-                g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON); // smooth edges
-                int cx = getWidth() / 2;
-                int cy = getHeight() / 2;
-                int r  = 10;
-                g2.setColor(new Color(200, 148, 20)); // darker gold for the outer ring of the coin
-                g2.fillOval(cx - r, cy - r, r * 2, r * 2);
-                g2.setColor(new Color(240, 195, 60)); // brighter gold for the inner face of the coin
-                g2.fillOval(cx - r + 3, cy - r + 3, r * 2 - 6, r * 2 - 6);
-                g2.setColor(new Color(160, 110, 10)); // dark brown for the dollar sign on the coin
-                g2.setFont(new Font("SansSerif", Font.BOLD, 10));
-                g2.drawString("$", cx - 2, cy + 4);
-            }
-        };
-        coinIcon.setPreferredSize(new Dimension(28, 48));
-        coinIcon.setBackground(new Color(45, 90, 40));
-
-        left.add(coinIcon);
-
-        // two-line money display: small "COINS" label above, large gold money number below
         JPanel moneyStack = new JPanel();
         moneyStack.setLayout(new BoxLayout(moneyStack, BoxLayout.Y_AXIS)); // stacks the two labels vertically
         moneyStack.setBackground(new Color(45, 90, 40));
         moneyStack.setBorder(BorderFactory.createEmptyBorder(8, 6, 8, 0)); // padding above and below
 
-        JLabel coinsLabel = new JLabel("COINS");
-        coinsLabel.setFont(new Font("SansSerif", Font.BOLD, 9));
-        coinsLabel.setForeground(new Color(140, 170, 110));
-        coinsLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
-
-        moneyLabel.setFont(new Font("SansSerif", Font.BOLD, 20));
+        moneyLabel = new JLabel("Balance: $" + formatMoney(game.getPlayer().getMoney()));
+        moneyLabel.setFont(new Font("SansSerif", Font.BOLD, 13));
         moneyLabel.setForeground(new Color(218, 165, 32));
         moneyLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
 
-        moneyStack.add(coinsLabel);
         moneyStack.add(moneyLabel);
-
         left.add(moneyStack);
 
         // right side of the top bar: save button
@@ -125,13 +86,11 @@ public class MainWindow implements RefreshListener {
         saveButton.setForeground(new Color(210, 235, 190));
         saveButton.setFocusPainted(false); // removes box around text
         saveButton.setBorderPainted(true);
-        saveButton.setBorder(BorderFactory.createCompoundBorder(
-                BorderFactory.createLineBorder(new Color(80, 130, 65), 1), // thin green outline
-                BorderFactory.createEmptyBorder(6, 16, 6, 16) // inner padding so the text isn't cramped
-        ));
+        saveButton.setBorder(BorderFactory.createLineBorder(new Color(80, 130, 65), 1)); // thin green outline
+        saveButton.setBorder(BorderFactory.createEmptyBorder(6,16,6,16)); // inner padding so the text isn't cramped
+
         saveButton.setCursor(new Cursor(Cursor.HAND_CURSOR)); // hand cursor on hover
 
-        //TODO make saving actually save
         saveButton.addActionListener(e -> {
             boolean ok = SaveManager.save(game); // write the game state to disk
             if (ok) {
@@ -153,30 +112,50 @@ public class MainWindow implements RefreshListener {
 
         right.add(saveButton);
 
-        bar.add(left,  BorderLayout.WEST);
-        bar.add(right, BorderLayout.EAST);
+        bar.add(left,BorderLayout.WEST);
+        bar.add(right,BorderLayout.EAST);
 
-        //TODO garden beds
+        JPanel grid = new JPanel(new GridLayout(2, 4, 25, 30)); // 2 rows, 4 columns, 10px gaps
+        grid.setBackground(new Color(72, 130, 62)); // green between the beds
+        grid.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20)); // padding around the edge
+
+        ArrayList<GardenBed> beds = game.getBeds();
+        for (int i = 0; i < beds.size(); i++) {
+            GardenBed bed = beds.get(i);
+            BedButton button = new BedButton(bed);
+            int index = i;
+
+            button.addActionListener(e -> {
+                if (bed.isEmpty()) {
+                    ShopWindow shop = new ShopWindow(frame, game, index);
+                    shop.setVisible(true);
+                } else {
+                    InfoWindow info = new InfoWindow(frame, game, index);
+                    info.setVisible(true);
+                }
+                refreshUI();
+            });
+
+            bedButtons.add(button);
+            grid.add(button);
+        }
 
         // refresh timer: refresh every bed every 5 seconds so growth stages update without clicking
         Timer timer = new Timer(5000, e -> refreshUI());
         timer.start();
 
         frame.setLayout(new BorderLayout());
-        frame.add(bar,  BorderLayout.NORTH); // top bar always sits at the top
+        frame.add(bar,BorderLayout.NORTH); // top bar always sits at the top
+        frame.add(grid,BorderLayout.CENTER);
 
         frame.setVisible(true); // show the window
     }
 
-    public void onRefreshNeeded() {
-        refreshUI(); // called by DebugWindow after commands that change game state
-    }
-
     // updates the money label and repaints every bed button
-    private void refreshUI() {
-        moneyLabel.setText(formatMoney(game.getPlayer().getMoney())); // show the latest balance
+    public void refreshUI() {
+        moneyLabel.setText("Balance: $" + formatMoney(game.getPlayer().getMoney()));
         for (int i = 0; i < bedButtons.size(); i++) {
-            bedButtons.get(i).refresh(); // tell each bed to redraw itself based on current plant state
+            bedButtons.get(i).refresh();
         }
     }
 

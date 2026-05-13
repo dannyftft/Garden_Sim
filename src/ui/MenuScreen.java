@@ -4,20 +4,8 @@ import data.SaveData;
 import data.SaveManager;
 import game.Game;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JTextArea;
-import javax.swing.BoxLayout;
-import javax.swing.Box;
-import javax.swing.BorderFactory;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Cursor;
-import java.awt.Dimension;
-import java.awt.Font;
+import javax.swing.*;
+import java.awt.*;
 
 public class MenuScreen {
 
@@ -51,7 +39,7 @@ public class MenuScreen {
         tagline.setForeground(new Color(140, 195, 110));
         tagline.setAlignmentX(Component.CENTER_ALIGNMENT); // centres it horizontally
 
-        javax.swing.JPanel header = new javax.swing.JPanel(); // panel that holds the title area
+        JPanel header = new JPanel(); // panel that holds the title area
         header.setLayout(new BoxLayout(header, BoxLayout.Y_AXIS)); // stacks title and tagline vertically
         header.setBackground(new Color(45, 90, 40));
         header.setBorder(BorderFactory.createEmptyBorder(36, 0, 28, 0)); // adds breathing room above and below the text
@@ -72,7 +60,6 @@ public class MenuScreen {
         description.setForeground(new Color(80, 60, 38));
         description.setFont(new Font("SansSerif", Font.PLAIN, 12)); // normal readable size
         description.setAlignmentX(Component.CENTER_ALIGNMENT);// centres it in the panel
-        description.setAlignmentY(Component.CENTER_ALIGNMENT);// centres it in the panel
 
         //New Game button style
         newGameBtn.setBackground(new Color(45, 90, 40));
@@ -112,7 +99,7 @@ public class MenuScreen {
         quitBtn.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         // center panel that holds the description and buttons
-        javax.swing.JPanel centre = new javax.swing.JPanel();
+        JPanel centre = new JPanel();
         centre.setLayout(new BoxLayout(centre, BoxLayout.Y_AXIS)); // stacks everything top to bottom
         centre.setBackground(new Color(252, 245, 220));
         centre.setBorder(BorderFactory.createEmptyBorder(30, 50, 20, 50)); // padding so things don't touch the edges
@@ -141,7 +128,7 @@ public class MenuScreen {
                 SaveManager.deleteSave(); // remove the old save before starting fresh
             }
             frame.dispose(); // close the menu window
-            Game game = new Game(); // create a brand new game with default settings
+            Game game = new Game(null); // create a brand new game with default settings
             MainWindow mainWindow = new MainWindow(game); // open the main garden window
             mainWindow.showMainWindow();
         });
@@ -170,8 +157,8 @@ public class MenuScreen {
             System.exit(0); // close the entire application immediately
         });
 
-        frame.add(header, BorderLayout.NORTH); // puts the green title area at the top
-        frame.add(centre, BorderLayout.CENTER); // puts the buttons in the middle
+        frame.add(header,BorderLayout.NORTH); // puts the green title area at the top
+        frame.add(centre,BorderLayout.CENTER); // puts the buttons in the middle
 
         frame.setVisible(true); // makes the window appear on screen
     }
