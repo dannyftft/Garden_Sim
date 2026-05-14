@@ -1,7 +1,7 @@
 package ui;
 
 import bed.GardenBed;
-
+import plant.RegularPlant;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -14,24 +14,47 @@ public class BedButton extends JButton {
 
     public BedButton(GardenBed bed) {
         this.bed = bed;
-        setFocusPainted(false);// removes the dotted border when clicked
+        setFocusPainted(false);
         setBorderPainted(false);
-        setBackground(new Color(124, 71, 0));
+        setBackground(new Color(100, 65, 40));
         refresh();
     }
 
     public void refresh() {
-        setIcon(loadImage("/images/withered.png"));// placeholder until plant logic is done
+        String path;
+
+        if (bed.isEmpty()) {
+            path = "/images/Empty.png";
+        } else {
+            RegularPlant plant = bed.getPlant();
+
+            if (plant.isWithered()) {
+                path = "/images/withered.png";
+            } else {
+                int stage = plant.getCurrentStage() + 1;
+                path = "/images/" + plant.getId() + "/" + plant.getId() + "_0" + stage + ".png";
+            }
+        }
+
+        ImageIcon icon = loadImage(path);
+
+        if (icon != null) {
+            Image scaled = icon.getImage().getScaledInstance(120, 120,Image.SCALE_REPLICATE);
+            setIcon(new ImageIcon(scaled));
+        } else {
+            setIcon(null);
+        }
+
         repaint();
     }
 
-    //placeholder
     private ImageIcon loadImage(String path) {
         try {
             InputStream stream = getClass().getResourceAsStream(path);
+            if (stream == null) return null;
             return new ImageIcon(ImageIO.read(stream));
         } catch (Exception ex) {
-            return null; // shows nothing if the image is missing
+            return null;
         }
     }
 

@@ -31,18 +31,26 @@ public class DebugWindow extends JDialog {
         addMoneyBtn.addActionListener(e -> {
             game.addDebugMoney(1000);
             mainWindow.refreshUI();
+            addMoneyBtn.setBorderPainted(false);
+            addMoneyBtn.setFocusPainted(false);
         });
 
         JButton advanceBtn = new JButton("Advance Stage");
         advanceBtn.addActionListener(e -> {
             game.debugAdvanceStage((int) bedSpinner.getValue());
             mainWindow.refreshUI();
+            mainWindow.refreshUI();
+            advanceBtn.setBorderPainted(false);
+            advanceBtn.setFocusPainted(false);
         });
 
         JButton witherBtn = new JButton("Force Wither");
         witherBtn.addActionListener(e -> {
             game.debugForceWither((int) bedSpinner.getValue());
             mainWindow.refreshUI();
+            mainWindow.refreshUI();
+            witherBtn.setBorderPainted(false);
+            witherBtn.setFocusPainted(false);
         });
 
         JPanel panel = new JPanel(new FlowLayout());
