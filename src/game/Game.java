@@ -13,7 +13,6 @@ public class Game {
     private Player player;
     private ArrayList<GardenBed> beds;
     private GameData gameData;
-    private int specialRefreshOffset;
 
     public Game(SaveData saveData) {
         this.gameData = GameData.load("/plants.json");
@@ -22,13 +21,13 @@ public class Game {
         if (saveData == null) {
             this.player = new Player(gameData.player.startingMoney); // fresh start
             for (int i = 0; i < gameData.player.startingBedCount; i++) {
-                beds.add(new GardenBed(i));
+                beds.add(new GardenBed());
             }
         } else {
             this.player = new Player(saveData.money); // restored balance
             for (int i = 0; i < saveData.beds.size(); i++) {
                 BedSaveData bedData = saveData.beds.get(i);
-                GardenBed bed = new GardenBed(i);
+                GardenBed bed = new GardenBed();
                 if (!bedData.isEmpty) {
                     PlantData plantData = gameData.findPlant(bedData.plantId);
                     if (plantData != null) {

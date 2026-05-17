@@ -8,8 +8,8 @@ public class Plant {
     protected int seedCost;
     protected int basePrice;
     protected int witheredPrice;
-    protected long growthDurationSeconds;
-    protected long witherDurationSeconds;
+    protected int growthDurationSeconds;
+    protected int witherDurationSeconds;
     protected int stageCount;
 
     public Plant(PlantData data) {

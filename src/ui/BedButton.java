@@ -39,7 +39,7 @@ public class BedButton extends JButton {
         ImageIcon icon = loadImage(path);
 
         if (icon != null) {
-            Image scaled = icon.getImage().getScaledInstance(120, 120,Image.SCALE_REPLICATE);
+            Image scaled = icon.getImage().getScaledInstance(120, 120,Image.SCALE_SMOOTH);
             setIcon(new ImageIcon(scaled));
         } else {
             setIcon(null);

@@ -12,10 +12,6 @@ public class Player {
         return money;
     }
 
-    public void setMoney(int money) {
-        this.money = money;
-    }
-
     public void addMoney(int amount) {
         this.money = this.money + amount; // adds to the current balance when selling a plant
     }

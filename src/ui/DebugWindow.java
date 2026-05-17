@@ -28,29 +28,29 @@ public class DebugWindow extends JDialog {
         bedSpinner = new JSpinner(new SpinnerNumberModel(0, 0, 7, 1)); // picks which bed to target
 
         JButton addMoneyBtn = new JButton("+$1000");
+        addMoneyBtn.setBorderPainted(false);
+        addMoneyBtn.setFocusPainted(false);
         addMoneyBtn.addActionListener(e -> {
             game.addDebugMoney(1000);
             mainWindow.refreshUI();
-            addMoneyBtn.setBorderPainted(false);
-            addMoneyBtn.setFocusPainted(false);
         });
 
         JButton advanceBtn = new JButton("Advance Stage");
+        advanceBtn.setBorderPainted(false);
+        advanceBtn.setFocusPainted(false);
         advanceBtn.addActionListener(e -> {
             game.debugAdvanceStage((int) bedSpinner.getValue());
             mainWindow.refreshUI();
             mainWindow.refreshUI();
-            advanceBtn.setBorderPainted(false);
-            advanceBtn.setFocusPainted(false);
         });
 
         JButton witherBtn = new JButton("Force Wither");
+        witherBtn.setBorderPainted(false);
+        witherBtn.setFocusPainted(false);
         witherBtn.addActionListener(e -> {
             game.debugForceWither((int) bedSpinner.getValue());
             mainWindow.refreshUI();
             mainWindow.refreshUI();
-            witherBtn.setBorderPainted(false);
-            witherBtn.setFocusPainted(false);
         });
 
         JPanel panel = new JPanel(new FlowLayout());

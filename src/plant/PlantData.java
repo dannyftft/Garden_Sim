@@ -8,8 +8,8 @@ public class PlantData {
     public int seedCost;
     public int basePrice;
     public int witheredPrice;
-    public long growthDurationSeconds;
-    public long witherDurationSeconds;
+    public int growthDurationSeconds;
+    public int witherDurationSeconds;
     public int stageCount;
     public String growthStyle;
     public boolean special;

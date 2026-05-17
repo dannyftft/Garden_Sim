@@ -4,11 +4,9 @@ import plant.RegularPlant;
 
 public class GardenBed {
 
-    private int bedIndex;
     private RegularPlant plant;
 
-    public GardenBed(int bedIndex) {
-        this.bedIndex = bedIndex;
+    public GardenBed() {
         this.plant = null; // no plant when the bed is first created
     }
 
