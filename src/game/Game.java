@@ -40,6 +40,12 @@ public class Game {
         }
     }
 
+    /**
+     * looks up the plant then charges the player and places it in the given bed
+     * @param bedIndex the bed to plant into
+     * @param plantId the id of the plant to buy
+     * @return true if the purchase succeeded and false if the plant was not found or funds were too low
+     */
     public boolean buyAndPlant(int bedIndex, String plantId) {
         PlantData plantData = gameData.findPlant(plantId); // looks up the plant by id
         if (plantData == null) {
@@ -54,6 +60,11 @@ public class Game {
         return true;
     }
 
+    /**
+     * sells the plant in the given bed and adds the price to the player's balance
+     * @param bedIndex the bed to sell from
+     * @return the amount of money the player received
+     */
     public int sellPlant(int bedIndex) {
         GardenBed bed = beds.get(bedIndex);
         if (bed.isEmpty()) {
@@ -65,11 +76,18 @@ public class Game {
         return price;
     }
 
-
+    /**
+     * adds money to the player's balance without any checks
+     * @param amount the amount to add
+     */
     public void addDebugMoney(int amount) {
         player.addMoney(amount);
     }
 
+    /**
+     * advances the plant in the given bed forward by one growth stage
+     * @param bedIndex the bed to target
+     */
     public void debugAdvanceStage(int bedIndex) {
         GardenBed bed = beds.get(bedIndex);
         if (bed.isEmpty()) {
@@ -80,6 +98,10 @@ public class Game {
         plant.shiftPlantedAt(-timePerStage); // shifts time back by one stage worth
     }
 
+    /**
+     * forces the plant in the given bed into a withered state
+     * @param bedIndex the bed to target
+     */
     public void debugForceWither(int bedIndex) {
         GardenBed bed = beds.get(bedIndex);
         if (bed.isEmpty()) {

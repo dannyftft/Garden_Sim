@@ -93,19 +93,34 @@ public class RegularPlant extends Plant {
         return "About " + hours + " hours";
     }
 
-    // pulls the multiplier list for this plant's growth style out of the economy config
+    /**
+     * pulls the stage multiplier list for the given growth style from the economy config
+     * @param growthStyle the growth style name to look up
+     * @param economy the economy config containing all growth styles
+     * @return the list of price multipliers for each stage
+     */
     private ArrayList<Double> loadMultipliers(String growthStyle, EconomyConfig economy) {
         return economy.growthStyles.get(growthStyle);
     }
 
-    // rolls a random price jitter
+    /**
+     * rolls a random jitter value within the allowed percentage of the base price
+     * @param basePrice the base sell price of the plant
+     * @param jitterPercent the max jitter as a fraction of the base price
+     * @return a random offset that can be positive or negative
+     */
     private int calculateJitter(int basePrice, double jitterPercent) {
         int max = (int) (basePrice * jitterPercent);
         int random = (int) (Math.random() * (max * 2 + 1));
         return random - max;
     }
 
-    // rounds to the nearest multiple of n so prices end in 0 or 5
+    /**
+     * rounds a value to the nearest multiple of n so prices end cleanly
+     * @param value the number to round
+     * @param n the multiple to round to
+     * @return the rounded value
+     */
     private int roundToNearest(int value, int n) {
         return ((value + n / 2) / n) * n;
     }

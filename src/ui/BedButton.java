@@ -19,7 +19,7 @@ public class BedButton extends JButton {
         setBackground(new Color(100, 65, 40));
         refresh();
     }
-
+    /** updates the button image to match the current state of the bed */
     public void refresh() {
         String path;
 
@@ -47,7 +47,10 @@ public class BedButton extends JButton {
 
         repaint();
     }
-
+    /**
+     * loads an image from the given resource path
+     * @return an ImageIcon or null if the image could not be loaded
+     */
     private ImageIcon loadImage(String path) {
         try {
             InputStream stream = getClass().getResourceAsStream(path);
